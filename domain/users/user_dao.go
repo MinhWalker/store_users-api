@@ -23,7 +23,7 @@ func (user *User) Get() *errors.RestErr {
 
 	result := statement.QueryRow(user.Id)
 	if getErr := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated); getErr != nil {
-		return mysql_utils.ParseError(getErr
+		return mysql_utils.ParseError(getErr)
 	}
 
 	return nil
