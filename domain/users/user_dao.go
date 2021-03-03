@@ -95,7 +95,7 @@ func (user *User) FindByStatus(status string) ([]User, *errors.RestErr) {
 	results := make([]User, 0)
 	for rows.Next() {
 		var user User
-		if err := rows.Scan(&user.Id, &user.FirstName, &user.Email, &user.DateCreated, &user.Status); err != nil {
+		if err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); err != nil {
 			return nil, mysql_utils.ParseError(err)
 		}
 		results = append(results, user)
