@@ -1,6 +1,7 @@
 package users
 
 import (
+	"github.com/MinhWalker/store_oauth-go/oauth"
 	"github.com/MinhWalker/store_users-api/domain/users"
 	"github.com/MinhWalker/store_users-api/services"
 	"github.com/MinhWalker/store_users-api/utils/errors"
@@ -8,7 +9,6 @@ import (
 	"net/http"
 	"strconv"
 )
-
 
 func getUserId(userIdParam string) (int64, *errors.RestErr) {
 	userId, userErr := strconv.ParseInt(userIdParam, 10, 64)
@@ -18,7 +18,7 @@ func getUserId(userIdParam string) (int64, *errors.RestErr) {
 	return userId, nil
 }
 
-func Create(c *gin.Context)  {
+func Create(c *gin.Context) {
 	var user users.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		restErr := errors.NewBadRequestError("invalid json body")
@@ -35,7 +35,13 @@ func Create(c *gin.Context)  {
 	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
-func Get(c *gin.Context)  {
+func Get(c *gin.Context) {
+	// TODO: authenticate request
+	if err := oauth.AuthenticateRequest(c.Request); err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
 	userId, idErr := getUserId(c.Param("user_id"))
 	if idErr != nil {
 		c.JSON(idErr.Status, idErr)
@@ -48,7 +54,12 @@ func Get(c *gin.Context)  {
 		return
 	}
 
-	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-Public") == "true"))
+	if oauth.GetCallerId(c.Request) == user.Id {
+		c.JSON(http.StatusOK, user.Marshall(false))
+		return
+	}
+
+	c.JSON(http.StatusOK, user.Marshall(oauth.IsPublic(c.Request)))
 }
 
 func Update(c *gin.Context) {
