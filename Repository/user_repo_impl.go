@@ -5,9 +5,10 @@ import (
 	"github.com/MinhWalker/store_users-api/datasources/mysql/users_db"
 	"github.com/MinhWalker/store_users-api/domain/users"
 	"github.com/MinhWalker/store_users-api/logger"
-	"github.com/MinhWalker/store_users-api/utils/errors"
 	"github.com/MinhWalker/store_users-api/utils/mysql_utils"
+	"github.com/MinhWalker/store_utils-go/rest_errors"
 	"strings"
+	"errors"
 )
 
 
@@ -29,99 +30,99 @@ type usersRepositoryImpl struct {
 	user *users.User
 }
 
-func (u *usersRepositoryImpl) Get() *errors.RestErr {
+func (u *usersRepositoryImpl) Get() *rest_errors.RestErr {
 	statement, err := users_db.Client.Prepare(queryGetUser)
 	user := u.user
 
 	if err != nil {
 		logger.Error("error when trying to prepare get user statement", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to prepare get user",errors.New("database error"))
 	}
 	defer statement.Close()
 
 	result := statement.QueryRow(user.Id)
 	if getErr := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); getErr != nil {
 		logger.Error("error when trying to get user by id", getErr)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to get user",errors.New("database error"))
 	}
 
 	return nil
 }
 
-func (u *usersRepositoryImpl) Save() *errors.RestErr {
+func (u *usersRepositoryImpl) Save() *rest_errors.RestErr {
 	statement, err := users_db.Client.Prepare(queryInsertUser)
 	user := u.user
 
 	if err != nil {
 		logger.Error("error when trying to prepare save user statement", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to prepare save user",errors.New("database error"))
 	}
 	defer statement.Close()
 
 	insertResult, saveErr := statement.Exec(user.FirstName, user.LastName, user.Email, user.DateCreated, user.Status, user.Password)
 	if saveErr != nil {
 		logger.Error("error when trying to save user", saveErr)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to save user",errors.New("database error"))
 	}
 	userId, err := insertResult.LastInsertId()
 	if err != nil {
 		logger.Error("error when trying to get last insert id after creating a new user", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to get last insert id after creating a new user",errors.New("database error"))
 	}
 	user.Id = userId
 	return nil
 }
 
-func (u *usersRepositoryImpl) Update() *errors.RestErr {
+func (u *usersRepositoryImpl) Update() *rest_errors.RestErr {
 	statement, err := users_db.Client.Prepare(queryUpdateUser)
 	user := u.user
 
 	if err != nil {
 		logger.Error("error when trying to prepare update user statement", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to prepare update user",errors.New("database error"))
 	}
 	defer statement.Close()
 
 	_, err = statement.Exec(user.FirstName, user.LastName, user.Email, user.Id)
 	if err != nil {
 		logger.Error("error when trying to update user", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to update user",errors.New("database error"))
 	}
 
 	return nil
 }
 
-func (u *usersRepositoryImpl) Delete() *errors.RestErr {
+func (u *usersRepositoryImpl) Delete() *rest_errors.RestErr {
 	statement, err := users_db.Client.Prepare(queryDeleteUser)
 	user := u.user
 
 	if err != nil {
 		logger.Error("error when trying to prepare delete user statement", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to prepare delete user statement",errors.New("database error"))
 	}
 	defer statement.Close()
 
 	if _, err = statement.Exec(user.Id); err != nil {
 		logger.Error("error when trying to delete user", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to delete user",errors.New("database error"))
 	}
 
 	return nil
 }
 
-func (u *usersRepositoryImpl) FindByStatus(status string) ([]users.User, *errors.RestErr) {
+func (u *usersRepositoryImpl) FindByStatus(status string) ([]users.User, *rest_errors.RestErr) {
 	statement, err := users_db.Client.Prepare(queryFindByStatus)
 
 	if err != nil {
 		logger.Error("error when trying to prepare find users by status statement", err)
-		return nil, errors.NewInternalServerError("database error")
+		return nil, rest_errors.NewInternalServerError("error when trying to prepare find users by status statement",errors.New("database error"))
 	}
 	defer statement.Close()
 
 	rows, err := statement.Query(status)
 	if err != nil {
 		logger.Error("error when trying to prepare find users by status", err)
-		return nil, errors.NewInternalServerError("database error")
+		return nil, rest_errors.NewInternalServerError("error when trying to prepare find users by status",errors.New("database error"))
 	}
 	defer rows.Close()
 
@@ -130,24 +131,24 @@ func (u *usersRepositoryImpl) FindByStatus(status string) ([]users.User, *errors
 		var user users.User
 		if err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); err != nil {
 			logger.Error("error when scan user row into user struct", err)
-			return nil, errors.NewInternalServerError("database error")
+			return nil, rest_errors.NewInternalServerError("error when scan user row into user struct",errors.New("database error"))
 		}
 		results = append(results, user)
 	}
 
 	if len(results) == 0 {
-		return nil, errors.NewNotFoundError(fmt.Sprintf("no users matching status %s", status))
+		return nil, rest_errors.NewNotFoundError(fmt.Sprintf("no users matching status %s", status))
 	}
 	return results, nil
 }
 
-func (u *usersRepositoryImpl) FindByEmailAndPassword() *errors.RestErr {
+func (u *usersRepositoryImpl) FindByEmailAndPassword() *rest_errors.RestErr {
 	statement, err := users_db.Client.Prepare(queryFindByEmailAndPassword)
 	user := u.user
 
 	if err != nil {
 		logger.Error("error when trying to prepare get user by email and password statement", err)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to prepare get user by email and password statement",errors.New("database error"))
 	}
 	defer statement.Close()
 
@@ -156,10 +157,10 @@ func (u *usersRepositoryImpl) FindByEmailAndPassword() *errors.RestErr {
 	//TODO: scan matched row into the values pointed at by dest
 	if getErr := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); getErr != nil {
 		if strings.Contains(getErr.Error(), mysql_utils.ErrorNoRows) {
-			return errors.NewNotFoundError("invalid user credentials")
+			return rest_errors.NewNotFoundError("invalid user credentials")
 		}
 		logger.Error("error when trying to get user by email and password", getErr)
-		return errors.NewInternalServerError("database error")
+		return rest_errors.NewInternalServerError("error when trying to get user by email and password",errors.New("database error"))
 	}
 
 	return nil
