@@ -38,7 +38,7 @@ func Create(c *gin.Context) {
 func Get(c *gin.Context) {
 	// TODO: authenticate request
 	if err := oauth.AuthenticateRequest(c.Request); err != nil {
-		c.JSON(err.Status, err)
+		c.JSON(err.Status(), err)
 		return
 	}
 
