@@ -2,13 +2,13 @@
 package users
 
 import (
+	"errors"
 	"fmt"
-	"github.com/MinhWalker/store_users-api/datasources/mysql/users_db"
-	"github.com/MinhWalker/store_users-api/logger"
-	"github.com/MinhWalker/store_users-api/utils/mysql_utils"
+	"github.com/MinhWalker/store_users-api/src/datasources/mysql/users_db"
+	"github.com/MinhWalker/store_users-api/src/logger"
+	"github.com/MinhWalker/store_users-api/src/utils/mysql_utils"
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 	"strings"
-	"errors"
 )
 
 const (

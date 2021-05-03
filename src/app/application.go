@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/MinhWalker/store_users-api/logger"
+	"github.com/MinhWalker/store_users-api/src/logger"
 	"github.com/gin-gonic/gin"
 )
 

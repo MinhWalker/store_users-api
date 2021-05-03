@@ -1,7 +1,7 @@
 package Repository
 
 import (
-	"github.com/MinhWalker/store_users-api/domain/users"
+	"github.com/MinhWalker/store_users-api/src/domain/users"
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 )
 
