@@ -22,6 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="973cb537-668b-4f90-af72-a34371992f97" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
@@ -89,6 +90,30 @@
 >>>>>>> 44da521cf0b587bfbf3c25a1761f0c41c62de62d
 >>>>>>> f9578d851dcedaef23f32998606659f2268f00f3
     </list>
+||||||| merged common ancestors
+    <list default="true" id="973cb537-668b-4f90-af72-a34371992f97" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/user/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/user/user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/url_mappings.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/url_mappings.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ping/ping_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ping/ping_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/users/users_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users/users_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasources/mysql/users_db/users_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasources/mysql/users_db/users_db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_dto.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_dto.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_login_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_login_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_marshaller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_marshaller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger/logger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/users_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/users_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/crypto_utils/crypto_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crypto_utils/crypto_utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/date_utils/date_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/date_utils/date_utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mysql_utils/mysql_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mysql_utils/mysql_utils.go" afterDir="false" />
+    </list>
+=======
+    <list default="true" id="ece72b67-2c4b-4dab-b7cb-84be69fbec05" name="Default Changelist" comment="" />
+>>>>>>> merge/issue
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
