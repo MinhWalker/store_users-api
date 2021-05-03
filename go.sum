@@ -1,8 +1,12 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/MinhWalker/store_oauth-go v0.0.0-20210331083919-682622519f03 h1:wYZw9o8KZCd4HDeiFIZvUBqvOXE+h7jWSXVySBbfrh8=
 github.com/MinhWalker/store_oauth-go v0.0.0-20210331083919-682622519f03/go.mod h1:/w0Ryit7yFvoxkOL7ykDjbKlHFKN6yra2/loSBpaJD0=
+github.com/MinhWalker/store_oauth-go v0.0.0-20210411100003-dc03987ed9a2 h1:tPOWtGZEidq5gy5LELoOwEPyiRCr1E4f9Sv7B+hacw4=
+github.com/MinhWalker/store_oauth-go v0.0.0-20210411100003-dc03987ed9a2/go.mod h1:TecZSrZbjjFHsK+dGHAPUzkjfTQ8ASaDtaI/OeVbUIE=
 github.com/MinhWalker/store_utils-go v0.0.0-20210328103242-a07ec4274242 h1:tAZr7iOOlhGg28W93m6b9mdjptaA8eNRIMiovlb1Uc8=
 github.com/MinhWalker/store_utils-go v0.0.0-20210328103242-a07ec4274242/go.mod h1:fHBrEE7EKEunzJH1ulBdLYR+TfZVYGYR4vind7wZJKE=
+github.com/MinhWalker/store_utils-go v0.0.0-20210331101409-d39dffa13065 h1:ih9UWAnao2Lt0xeIMV+ANMs/jwrz4+XwJ96UjuMN5MQ=
+github.com/MinhWalker/store_utils-go v0.0.0-20210331101409-d39dffa13065/go.mod h1:o/uerB81GYy0DKjkCyGaYPdCmQguIXaT+zn3uS75YDI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=

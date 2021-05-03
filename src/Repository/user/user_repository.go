@@ -3,17 +3,17 @@ package user
 import (
 	"errors"
 	"fmt"
-	"github.com/MinhWalker/store_users-api/datasources/mysql/users_db"
-	"github.com/MinhWalker/store_users-api/domain/users"
-	"github.com/MinhWalker/store_users-api/logger"
-	"github.com/MinhWalker/store_users-api/utils/mysql_utils"
+	"github.com/MinhWalker/store_users-api/src/datasources/mysql/users_db"
+	"github.com/MinhWalker/store_users-api/src/domain/users"
+	"github.com/MinhWalker/store_users-api/src/logger"
+	"github.com/MinhWalker/store_users-api/src/utils/mysql_utils"
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 	"strings"
 )
 
 const (
 	queryInsertUser             = "INSERT INTO users(first_name, last_name, email, date_created, status, password) VALUES(?, ?, ?, ?, ?, ?);"
-	queryGetUser                = " id, first_name, last_name, email, date_created, status FROM users WHERE id=?"
+	queryGetUser                = "SELECT id, first_name, last_name, email, date_created, status FROM users WHERE id=?"
 	queryUpdateUser             = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?;"
 	queryDeleteUser             = "DELETE FROM users WHERE id=?;"
 	queryFindByStatus           = "SELECT id, first_name, last_name, email, date_created, status FROM users WHERE status=?;"

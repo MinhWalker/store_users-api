@@ -2,8 +2,8 @@ package users
 
 import (
 	"github.com/MinhWalker/store_oauth-go/oauth"
-	"github.com/MinhWalker/store_users-api/domain/users"
-	"github.com/MinhWalker/store_users-api/services"
+	"github.com/MinhWalker/store_users-api/src/domain/users"
+	"github.com/MinhWalker/store_users-api/src/services"
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
