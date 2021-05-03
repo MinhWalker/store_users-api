@@ -1,10 +1,20 @@
 package services
 
 import (
+<<<<<<< HEAD:src/services/users_service.go
 	"github.com/MinhWalker/store_users-api/src/Repository/user"
 	"github.com/MinhWalker/store_users-api/src/domain/users"
 	"github.com/MinhWalker/store_users-api/src/utils/crypto_utils"
 	"github.com/MinhWalker/store_users-api/src/utils/date_utils"
+||||||| merged common ancestors:services/users_service.go
+	"github.com/MinhWalker/store_users-api/domain/users"
+	"github.com/MinhWalker/store_users-api/utils/crypto_utils"
+	"github.com/MinhWalker/store_users-api/utils/date_utils"
+=======
+	"github.com/MinhWalker/store_users-api/src/domain/users"
+	"github.com/MinhWalker/store_users-api/src/utils/crypto_utils"
+	"github.com/MinhWalker/store_users-api/src/utils/date_utils"
+>>>>>>> main:services/users_service.go
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 )
 
