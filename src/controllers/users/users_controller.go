@@ -10,7 +10,27 @@ import (
 	"strconv"
 )
 
-func getUserId(userIdParam string) (int64, rest_errors.RestErr) {
+type UserController interface {
+	getUserId(userIdParam string) (int64, rest_errors.RestErr)
+	Create(c *gin.Context)
+	Get(c *gin.Context)
+	Update(c *gin.Context)
+	Delete(c *gin.Context)
+	Search(c *gin.Context)
+	Login(c *gin.Context)
+}
+
+type userController struct {
+	service services.UsersService
+}
+
+func NewUserHandler(service services.UsersService) UserController {
+	return &userController{
+		service: service,
+	}
+}
+
+func (u *userController) getUserId(userIdParam string) (int64, rest_errors.RestErr) {
 	userId, userErr := strconv.ParseInt(userIdParam, 10, 64)
 	if userErr != nil {
 		return 0, rest_errors.NewBadRequestError("user id should be a number")
@@ -18,7 +38,7 @@ func getUserId(userIdParam string) (int64, rest_errors.RestErr) {
 	return userId, nil
 }
 
-func Create(c *gin.Context) {
+func (u *userController) Create(c *gin.Context) {
 	var user users.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		restErr := rest_errors.NewBadRequestError("invalid json body")
@@ -26,7 +46,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	result, saveErr := services.UsersService.CreateUser(user)
+	result, saveErr := u.service.CreateUser(user)
 	if saveErr != nil {
 		c.JSON(saveErr.Status(), saveErr)
 		return
@@ -35,20 +55,20 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
-func Get(c *gin.Context) {
+func (u *userController) Get(c *gin.Context) {
 	// TODO: authenticate request
 	if err := oauth.AuthenticateRequest(c.Request); err != nil {
 		c.JSON(err.Status(), err)
 		return
 	}
 
-	userId, idErr := getUserId(c.Param("user_id"))
+	userId, idErr := u.getUserId(c.Param("user_id"))
 	if idErr != nil {
 		c.JSON(idErr.Status(), idErr)
 		return
 	}
 
-	user, getErr := services.UsersService.GetUser(userId)
+	user, getErr := u.service.GetUser(userId)
 	if getErr != nil {
 		c.JSON(getErr.Status(), getErr)
 		return
@@ -62,8 +82,8 @@ func Get(c *gin.Context) {
 	c.JSON(http.StatusOK, user.Marshall(oauth.IsPublic(c.Request)))
 }
 
-func Update(c *gin.Context) {
-	userId, idErr := getUserId(c.Param("user_id"))
+func (u *userController) Update(c *gin.Context) {
+	userId, idErr := u.getUserId(c.Param("user_id"))
 	if idErr != nil {
 		c.JSON(idErr.Status(), idErr)
 		return
@@ -81,7 +101,7 @@ func Update(c *gin.Context) {
 
 	isPartial := c.Request.Method == http.MethodPatch
 
-	result, err := services.UsersService.UpdateUser(isPartial, user)
+	result, err := u.service.UpdateUser(isPartial, user)
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return
@@ -89,24 +109,24 @@ func Update(c *gin.Context) {
 	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
-func Delete(c *gin.Context) {
-	userId, idErr := getUserId(c.Param("user_id"))
+func (u *userController) Delete(c *gin.Context) {
+	userId, idErr := u.getUserId(c.Param("user_id"))
 	if idErr != nil {
 		c.JSON(idErr.Status(), idErr)
 		return
 	}
 
-	if err := services.UsersService.DeleteUser(userId); err != nil {
+	if err := u.service.DeleteUser(userId); err != nil {
 		c.JSON(err.Status(), err)
 		return
 	}
 	c.JSON(http.StatusOK, map[string]string{"status": "deleted"})
 }
 
-func Search(c *gin.Context) {
+func (u *userController) Search(c *gin.Context) {
 	status := c.Query("status")
 
-	users, err := services.UsersService.SearchUser(status)
+	users, err := u.service.SearchUser(status)
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return
@@ -115,14 +135,14 @@ func Search(c *gin.Context) {
 	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
-func Login(c *gin.Context) {
+func (u *userController) Login(c *gin.Context) {
 	var request users.LoginRequest
 	if err := c.ShouldBindJSON(&request); err != nil {
 		restErr := rest_errors.NewBadRequestError("invalid json body")
 		c.JSON(restErr.Status(), restErr)
 		return
 	}
-	user, err := services.UsersService.LoginUser(request)
+	user, err := u.service.LoginUser(request)
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return

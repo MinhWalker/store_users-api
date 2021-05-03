@@ -1,19 +1,24 @@
 package services
 
 import (
+<<<<<<< HEAD:src/services/users_service.go
 	"github.com/MinhWalker/store_users-api/src/domain/users"
 	"github.com/MinhWalker/store_users-api/src/utils/crypto_utils"
 	"github.com/MinhWalker/store_users-api/src/utils/date_utils"
+||||||| merged common ancestors:services/users_service.go
+	"github.com/MinhWalker/store_users-api/domain/users"
+	"github.com/MinhWalker/store_users-api/utils/crypto_utils"
+	"github.com/MinhWalker/store_users-api/utils/date_utils"
+=======
+	"github.com/MinhWalker/store_users-api/src/Repository/user"
+	"github.com/MinhWalker/store_users-api/src/domain/users"
+	"github.com/MinhWalker/store_users-api/src/utils/crypto_utils"
+	"github.com/MinhWalker/store_users-api/src/utils/date_utils"
+>>>>>>> 44da521cf0b587bfbf3c25a1761f0c41c62de62d:services/users_service.go
 	"github.com/MinhWalker/store_utils-go/rest_errors"
 )
 
-var (
-	UsersService usersServiceInterface = &usersService{}
-)
-
-type usersService struct{}
-
-type usersServiceInterface interface {
+type UsersService interface {
 	GetUser(int64) (*users.User, rest_errors.RestErr)
 	CreateUser(users.User) (*users.User, rest_errors.RestErr)
 	UpdateUser(bool, users.User) (*users.User, rest_errors.RestErr)
@@ -22,12 +27,22 @@ type usersServiceInterface interface {
 	LoginUser(users.LoginRequest) (*users.User, rest_errors.RestErr)
 }
 
+type usersService struct{
+	userRepository user.UserRepository
+}
+
+func NewUserService(userRepo user.UserRepository) UsersService {
+	return &usersService{
+		userRepository: userRepo,
+	}
+}
+
 func (s *usersService) GetUser(userId int64) (*users.User, rest_errors.RestErr) {
-	dao := &users.User{Id: userId}
-	if err := dao.Get(); err != nil {
+	user := users.User{Id: userId}
+	if err := s.userRepository.Get(user); err != nil {
 		return nil, err
 	}
-	return dao, nil
+	return &user, nil
 }
 
 func (s *usersService) CreateUser(user users.User) (*users.User, rest_errors.RestErr) {
@@ -38,15 +53,15 @@ func (s *usersService) CreateUser(user users.User) (*users.User, rest_errors.Res
 	user.Status = users.StatusActive
 	user.DateCreated = date_utils.GetNowDBFormat()
 	user.Password = crypto_utils.GetMd5(user.Password)
-	if err := user.Save(); err != nil {
+	if err := s.userRepository.Save(user); err != nil {
 		return nil, err
 	}
 	return &user, nil
 }
 
 func (s *usersService) UpdateUser(isPartial bool, user users.User) (*users.User, rest_errors.RestErr) {
-	current := &users.User{Id: user.Id}
-	if err := current.Get(); err != nil {
+	current := users.User{Id: user.Id}
+	if err := s.userRepository.Get(current); err != nil {
 		return nil, err
 	}
 
@@ -68,30 +83,29 @@ func (s *usersService) UpdateUser(isPartial bool, user users.User) (*users.User,
 		current.Email = user.Email
 	}
 
-	if err := current.Update(); err != nil {
+	if err := s.userRepository.Update(current); err != nil {
 		return nil, err
 	}
-	return current, nil
+	return &current, nil
 }
 
 func (s *usersService) DeleteUser(userId int64) rest_errors.RestErr {
-	dao := &users.User{Id: userId}
-	return dao.Delete()
+	current := users.User{Id: userId}
+	return s.userRepository.Delete(current)
 }
 
 func (s *usersService) SearchUser(status string) (users.Users, rest_errors.RestErr) {
-	dao := &users.User{}
-	return dao.FindByStatus(status)
+	return s.userRepository.FindByStatus(status)
 }
 
 func (s *usersService) LoginUser(request users.LoginRequest) (*users.User, rest_errors.RestErr) {
-	dao := &users.User{
+	user := users.User{
 		Email:    request.Email,
 		Password: crypto_utils.GetMd5(request.Password),
 	}
-	if err := dao.FindByEmailAndPassword(); err != nil {
+	if err := s.userRepository.FindByEmailAndPassword(user); err != nil {
 		return nil, err
 	}
-	return dao, nil
+	return &user, nil
 }
 

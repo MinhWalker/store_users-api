@@ -24,6 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="973cb537-668b-4f90-af72-a34371992f97" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Repository/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/user_repo.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Repository/user_repo_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/user_repo_impl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.go" afterDir="false" />
@@ -41,6 +42,26 @@
       <change beforePath="$PROJECT_DIR$/utils/crypto_utils/crypto_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crypto_utils/crypto_utils.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/date_utils/date_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/date_utils/date_utils.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/mysql_utils/mysql_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mysql_utils/mysql_utils.go" afterDir="false" />
+||||||| merged common ancestors
+=======
+      <change beforePath="$PROJECT_DIR$/Repository/user/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/user/user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/application.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/url_mappings.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/url_mappings.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ping/ping_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ping/ping_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/users/users_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users/users_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasources/mysql/users_db/users_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasources/mysql/users_db/users_db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_dto.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_dto.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_login_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_login_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/users/user_marshaller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/users/user_marshaller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger/logger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/users_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/users_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/crypto_utils/crypto_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crypto_utils/crypto_utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/date_utils/date_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/date_utils/date_utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mysql_utils/mysql_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mysql_utils/mysql_utils.go" afterDir="false" />
+>>>>>>> 44da521cf0b587bfbf3c25a1761f0c41c62de62d
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +78,14 @@
   <component name="GOROOT" url="file:///usr/local/Cellar/go/1.16.2/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1mgvlHukJpJvmZeXOcqLZEXn33j" />
   <component name="ProjectLevelVcsManager">
@@ -89,7 +118,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="$PROJECT_DIR$/src" />
+||||||| merged common ancestors
+=======
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/Repository/user" />
+>>>>>>> 44da521cf0b587bfbf3c25a1761f0c41c62de62d
       <recent name="$PROJECT_DIR$/utils/crypto_utils" />
       <recent name="$PROJECT_DIR$/datasources/mysql/users_db" />
     </key>
