@@ -14,5 +14,10 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+=======
+.idea
+>>>>>>> modify/merge
 *.DS_Store
 .idea
